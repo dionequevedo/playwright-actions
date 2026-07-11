@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test';
 
 test('usuário obrigatório', async ({ page }) => {
   await login(page, '', 'senha123')
-  await toast(page, 'Informe o seu nome de usuário!s')
+  await toast(page, 'Informe o seu nome de usuário!')
 });
 
 test('senha obrigatória', async ({ page }) => {
@@ -38,14 +38,15 @@ const modal = async (page: Page, message: string) => {
 const login = async (page: Page, user: string, pass: string) => {
     await page.goto('/')
 
-    const username = page.locator('[name=user]')
-    const password = page.locator('[name=pass]')
+    if (user ) {
+      const username = page.locator('input[name="user"]')
+      await username.fill(user)
+    }
 
-    user 
-      ? await username.fill(user) : null
-
-    pass
-      ? await password.fill(pass) : null
+    if (pass ) {
+      const password = page.locator('input[name="pass"]')
+      await password.fill(pass)
+    }
 
     await page.click('css=button >> text=Entrar')
 }

@@ -10,4 +10,4 @@ results/*.xml
 # Playwright
 /blob-report/
 /playwright/.auth/
-.env
+.env/

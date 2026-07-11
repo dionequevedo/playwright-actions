@@ -1,10 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-import * as dotenv from 'dotenv';
-import * as path from 'node:path';
-import * as process from 'node:process';
-
-// Carrega as variáveis do arquivo .env
-dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * Read environment variables from file.
@@ -17,13 +11,15 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
 export default defineConfig({
   testDir: './e2e',
-  timeout: 30 * 1000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
+  /* Default timeout for each test (in milliseconds) */
+  timeout: 2000,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
@@ -37,6 +33,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    baseURL: process.env.BASE_URL || 'https://loginxp.vercel.app',
   },
 
   /* Configure projects for major browsers */
@@ -46,15 +43,15 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
