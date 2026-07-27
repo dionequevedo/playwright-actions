@@ -6,3 +6,8 @@ results/*.xml
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# Playwright
+/blob-report/
+/playwright/.auth/
+.env
