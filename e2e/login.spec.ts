@@ -38,16 +38,19 @@ const modal = async (page: Page, message: string) => {
 const login = async (page: Page, user: string, pass: string) => {
     await page.goto('/')
 
-    if (user ) {
+    if (user) {
       const username = page.locator('input[name="user"]')
+      await expect(username).toBeVisible()
       await username.fill(user)
     }
 
-    if (pass ) {
+    if (pass) {
       const password = page.locator('input[name="pass"]')
+      await expect(password).toBeVisible()
       await password.fill(pass)
     }
 
     await page.click('css=button >> text=Entrar')
 }
+
 
