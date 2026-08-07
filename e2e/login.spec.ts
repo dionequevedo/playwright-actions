@@ -6,24 +6,22 @@ test('usuário obrigatório', async ({ page }) => {
 });
 
 test('senha obrigatória', async ({ page }) => {
-  await login(page,'qa', '')
+  await login(page, 'qa', '')
   await toast(page, 'Informe a sua senha secreta!')
 })
 
 test('usuário não existe', async ({ page }) => {
-  await login(page,'teste', 'teste')
+  await login(page, 'teste', 'teste')
   await toast(page, 'Oops! Credenciais inválidas :(')
 })
 
 test('senha incorreta', async ({ page }) => {
-  await login(page,'qa', 'teste')
-  //await toast(page, 'Oops! Credenciais inválidas :(')
-  await toast(page, 'Oops! Senha inválida :(')
-
+  await login(page, 'qa', 'teste')
+  await toast(page, 'Oops! Credenciais inválidas :(')
 })
 
 test('com sucesso', async ({ page }) => {
-  await login(page,'qa', 'xperience')
+  await login(page, 'qa', 'xperience')
   await modal(page, 'Suas credenciais são válidas :)')
 })
 
@@ -38,21 +36,21 @@ const modal = async (page: Page, message: string) => {
 }
 
 const login = async (page: Page, user: string, pass: string) => {
-    await page.goto('/')
+  await page.goto('/')
 
-    if (user) {
-      const username = page.locator('input[name="user"]')
-      await expect(username).toBeVisible()
-      await username.fill(user)
-    }
+  if (user) {
+    const username = page.locator('input[name="user"]')
+    await expect(username).toBeVisible()
+    await username.fill(user)
+  }
 
-    if (pass) {
-      const password = page.locator('input[name="pass"]')
-      await expect(password).toBeVisible()
-      await password.fill(pass)
-    }
+  if (pass) {
+    const password = page.locator('input[name="pass"]')
+    await expect(password).toBeVisible()
+    await password.fill(pass)
+  }
 
-    await page.click('css=button >> text=Entrar')
+  await page.click('css=button >> text=Entrar')
 }
 
 
