@@ -36,6 +36,9 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v7.0.1
       with:
-        name: playwright-report
+        name: playwright-test-results
         path: playwright-report/
         retention-days: 30
+        overwrite: true
+        if-no-files-found: warn
+        compress: true
