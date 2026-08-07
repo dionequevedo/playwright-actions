@@ -35,7 +35,8 @@ export default defineConfig({
     actionTimeout: 3000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    baseURL: "https://loginxp.vercel.app"
+    baseURL: 'https://loginxp.vercel.app',
+    video: 'on'
   },
 
   /* Configure projects for major browsers */
