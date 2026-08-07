@@ -32,13 +32,18 @@ jobs:
     - name: Run Playwright tests
       run: npx playwright test
 
+    - name: Get current date and time
+      if: always()
+      run: echo "NOW=$(TZ='America/Sao_Paulo' date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+
     - name: Upload Playwright Report
       if: always()
-      uses: actions/upload-artifact@v7.0.1
+      uses: actions/upload-artifact@v7
       with:
-        name: playwright-test-results
+        name: playwright-test-results-${{ env.NOW }}
         path: playwright-report/
-        retention-days: 30
-        overwrite: true
+        include-hidden-files: false
+        overwrite: false
         if-no-files-found: warn
-        compress: true
+        compression-level: 0
+        retention-days: 30
